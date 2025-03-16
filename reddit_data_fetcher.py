@@ -1,7 +1,7 @@
 import asyncpraw
 import pandas as pd
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 class RedditFetcher:
     def __init__(self, client_id, client_secret, user_agent, subreddit_names, save_path='./data'):
@@ -34,7 +34,7 @@ class RedditFetcher:
                 'title': submission.title,
                 'author': str(submission.author),
                 'score': submission.score,
-                'created_utc': datetime.fromtimestamp(submission.created_utc, tz=datetime.timezone.utc),
+                'created_utc': datetime.fromtimestamp(submission.created_utc, tz=timezone.utc),
                 'num_comments': submission.num_comments,
                 'url': submission.url,
                 'selftext': submission.selftext
