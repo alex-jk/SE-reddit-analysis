@@ -10,3 +10,4 @@ wordcloud
 transformers
 asyncpraw
 nest_asyncio
+dotenv
