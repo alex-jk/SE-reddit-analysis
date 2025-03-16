@@ -1,0 +1,12 @@
+pandas
+numpy
+scikit-learn
+spacy
+nltk
+jupyter
+matplotlib
+seaborn
+wordcloud
+transformers
+asyncpraw
+nest_asyncio
