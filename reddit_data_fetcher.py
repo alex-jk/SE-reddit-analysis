@@ -155,27 +155,27 @@ class RedditFetcher:
         print("\n✅ Search fetch complete.")
         await reddit.close()
 
-def combine_subreddit_files(self, combined_file_name='reddit_combined_posts.csv'):
-    dfs = []
+    def combine_subreddit_files(self, combined_file_name='reddit_combined_posts.csv'):
+        dfs = []
 
-    # Use the same file naming convention as fetch_search_data()
-    for subreddit_name in self.subreddit_names:
-        file_path = os.path.join(self.posts_file_path, f'{subreddit_name}_posts_data.csv')
+        # Use the same file naming convention as fetch_search_data()
+        for subreddit_name in self.subreddit_names:
+            file_path = os.path.join(self.posts_file_path, f'{subreddit_name}_posts_data.csv')
 
-        if os.path.exists(file_path):
-            df = pd.read_csv(file_path)
-            dfs.append(df)
-            print(f"✅ Loaded {len(df)} posts from {file_path}")
+            if os.path.exists(file_path):
+                df = pd.read_csv(file_path)
+                dfs.append(df)
+                print(f"✅ Loaded {len(df)} posts from {file_path}")
+            else:
+                print(f"⚠️ No file found for {subreddit_name} at {file_path}")
+
+        if dfs:
+            combined_df = pd.concat(dfs, ignore_index=True)
+            combined_df = combined_df.drop_duplicates(subset='id')
+
+            combined_path = os.path.join(self.posts_file_path, combined_file_name)
+            combined_df.to_csv(combined_path, index=False)
+
+            print(f"\n✅ Combined dataset saved as: {combined_path} ({len(combined_df)} unique posts)")
         else:
-            print(f"⚠️ No file found for {subreddit_name} at {file_path}")
-
-    if dfs:
-        combined_df = pd.concat(dfs, ignore_index=True)
-        combined_df = combined_df.drop_duplicates(subset='id')
-
-        combined_path = os.path.join(self.posts_file_path, combined_file_name)
-        combined_df.to_csv(combined_path, index=False)
-
-        print(f"\n✅ Combined dataset saved as: {combined_path} ({len(combined_df)} unique posts)")
-    else:
-        print("⚠️ No subreddit files to combine.")
+            print("⚠️ No subreddit files to combine.")
