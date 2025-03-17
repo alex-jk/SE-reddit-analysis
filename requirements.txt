@@ -11,3 +11,4 @@ transformers
 asyncpraw
 nest_asyncio
 dotenv
+psycopg2
