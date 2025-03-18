@@ -12,3 +12,6 @@ asyncpraw
 nest_asyncio
 dotenv
 psycopg2
+sqlalchemy
+sentence-transformers
+ipywidgets
