@@ -1,17 +1,20 @@
 {
-    "name": "Python 3",
-    "image": "mcr.microsoft.com/devcontainers/python:3.11",
+    "name": "Python 3 + Postgres",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "python-app",               // 👈 define this in compose.yml next!
+    "workspaceFolder": "/workspace",       // 👈 matches folder in compose.yml
     "features": {
-        "ghcr.io/devcontainers/features/git:1": {},
-        "ghcr.io/devcontainers/features/github-cli:1": {}
+      "ghcr.io/devcontainers/features/git:1": {},
+      "ghcr.io/devcontainers/features/github-cli:1": {}
     },
     "customizations": {
-        "vscode": {
-            "extensions": [
-                "ms-python.python",
-                "ms-toolsai.jupyter"
-            ]
-        }
+      "vscode": {
+        "extensions": [
+          "ms-python.python",
+          "ms-toolsai.jupyter"
+        ]
+      }
     },
-    "postCreateCommand": "pip install -r requirements.txt"
-}
+    "postCreateCommand": "pip install -r requirements.txt",
+    "forwardPorts": [5432]
+  }  
