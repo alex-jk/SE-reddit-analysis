@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  python-app:
+    image: mcr.microsoft.com/devcontainers/python:3.11
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity     # Keeps the container running
+    depends_on:
+      - postgres
+    networks:
+      - dev-network
+
+  postgres:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: redditdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - dev-network
+
+volumes:
+  pgdata:
+
+networks:
+  dev-network:
