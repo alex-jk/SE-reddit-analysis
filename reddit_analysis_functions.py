@@ -10,11 +10,15 @@ class ViolenceModel:
         
         self.violent_phrases = [
             "tried to strangle me",
+            "hit and strangled,"
             "tried to kill me",
             "choked me",
             "assaulted me",
             "strangulation",
-            "aggravated assault"
+            "aggravated assault",
+            "beat me",
+            "tried to murder me",
+            "physically violent"
         ]
         
         self.reference_embeddings = self.embed_model.encode(
@@ -64,3 +68,16 @@ class ViolenceModel:
                 matches.append((phrase, max_score))
         
         return matches
+
+# Define a helper function for labeling
+def label_post_as_violent(text, model, threshold=0.7):
+    matches = model.find_similar_phrases(text, threshold=threshold)
+    
+    # Ensure unique matches
+    unique_matches = list(set(matches)) if matches else []
+    
+    # Label is 1 if there are any matches, otherwise 0
+    label = 1 if unique_matches else 0
+    
+    return label, unique_matches
+
