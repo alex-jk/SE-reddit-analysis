@@ -13,10 +13,12 @@ class ViolenceModel:
             "hit and strangled,"
             "tried to kill me",
             "choked me",
+            "had been choked",
             "assaulted me",
             "strangulation",
             "aggravated assault",
             "beat me",
+            "hit me",
             "tried to murder me",
             "physically violent"
         ]
