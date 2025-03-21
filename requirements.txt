@@ -15,3 +15,4 @@ psycopg2
 sqlalchemy
 sentence-transformers
 ipywidgets
+setfit

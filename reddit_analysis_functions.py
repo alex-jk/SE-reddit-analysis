@@ -14,7 +14,7 @@ class ViolenceModel:
             "tried to kill me",
             "choked me",
             "had been choked",
-            "assaulted me",
+            "physically assaulted me",
             "strangulation",
             "aggravated assault",
             "beat me",
