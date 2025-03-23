@@ -10,16 +10,21 @@ class ViolenceModel:
         
         self.violent_phrases = [
             "tried to strangle me",
-            "hit and strangled,"
+            "hit and strangled",
+            "strangled me",
+            "strangling me",
             "tried to kill me",
             "choked me",
             "was choking me",
+            "choke me",
             "had been choked",
             "physically assaulted me",
             "strangulation",
             "aggravated assault",
             "beat me",
+            "beating me",
             "hit me",
+            "hitting me",
             "punched me",
             "tried to murder me",
             "physically violent"
@@ -33,19 +38,20 @@ class ViolenceModel:
     def embed_text(self, text):
         return self.embed_model.encode(text, convert_to_tensor=True)
 
-    def extract_sliding_phrases(self, text, window_size=4):
+    def extract_sliding_phrases(self, text, window_sizes=[3, 4]):
         """
-        Extracts sliding windows of 'window_size' words from each sentence in the text.
+        Extracts sliding windows of specified 'window_sizes' from each sentence in the text.
         """
         doc = self.nlp(text)
         phrases = []
         
         for sent in doc.sents:
             words = [token.text for token in sent if not token.is_punct]
-            for i in range(len(words) - window_size + 1):
-                phrase = ' '.join(words[i:i + window_size])
-                phrases.append(phrase)
-                
+            for window_size in window_sizes:
+                for i in range(len(words) - window_size + 1):
+                    phrase = ' '.join(words[i:i + window_size])
+                    phrases.append(phrase)
+                    
         return phrases
 
     def find_similar_phrases(self, text, threshold=0.7):
