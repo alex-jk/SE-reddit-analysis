@@ -17,7 +17,7 @@ class RedditFetcher:
         self.posts_file_path = posts_file_path
         self.limit_num = limit_num
         self.search_time_filter = search_time_filter
-        self.df_columns = df_columns or ['id', 'title', 'author', 'score', 'num_comments', 'url', 'selftext',
+        self.df_columns = df_columns or ['id', 'title', 'score', 'num_comments', 'url', 'selftext',
                                          'created_at', 'scrape_time', 'search_term']
         self.dtformat = dtformat
 
