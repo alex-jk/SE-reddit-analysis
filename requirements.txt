@@ -2,7 +2,7 @@ pandas
 numpy
 scikit-learn
 spacy
-nltk
+nltk==3.7
 jupyter
 matplotlib
 seaborn

@@ -2,6 +2,9 @@ import spacy
 from sentence_transformers import SentenceTransformer, util
 import torch
 import pandas as pd
+from nltk.tokenize import sent_tokenize
+import nltk
+nltk.download('punkt')
 
 class ViolenceModel:
     def __init__(self):
@@ -91,3 +94,13 @@ def label_post_as_violent(text, model, threshold=0.7):
     
     return label, unique_matches
 
+def get_relevant_sentences(text, model):
+    sentences = sent_tokenize(text)
+    if not sentences:
+        return ""
+    
+    preds = model.predict(sentences)
+
+    # Keep only sentences predicted as relevant (class 1)
+    relevant = [s for s, p in zip(sentences, preds) if p == 1]
+    return relevant
